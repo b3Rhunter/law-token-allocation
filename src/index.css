@@ -54,6 +54,17 @@ code {
     monospace;
 }
 
+.connect {
+  position: fixed;
+  top: 14px;
+  right: 24px;
+}
+
+.connect p {
+  padding: 0px;
+  margin: 0px;
+}
+
 .register {
   text-align: center;
   border: 1px solid #fff;

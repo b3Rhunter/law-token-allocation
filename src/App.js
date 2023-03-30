@@ -22,8 +22,9 @@ function App() {
   const [openRedeem, setRedeem] = useState(false)
   const [openReward, setReward] = useState(false)
 
-  useEffect(() => {
-    const init = async () => {
+  const [connected, setConnected] = useState(false)
+  
+    const connect = async () => {
       const _provider = new ethers.providers.Web3Provider(window.ethereum);
       const _signer = _provider.getSigner();
       const _contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI, _signer);
@@ -31,10 +32,8 @@ function App() {
       setProvider(_provider);
       setSigner(_signer);
       setContract(_contract);
+      setConnected(true)
     };
-
-    init();
-  }, []);
 
   useEffect(() => {
     if (contract) {
@@ -133,12 +132,21 @@ function App() {
     <div className="App">
       <h1 style={{ textAlign: "center" }}>Law Allocation Platform</h1>
 
+      <button className='connect' onClick={connect}>
+        {!connected && (
+          <p>connect</p>
+        )}
+        {connected && (
+          <p>connected</p>
+        )}
+      </button>
+
       <div className='menu'>
       <button className='registerUser' onClick={registerNewUser}>Register New User</button>
       <button className='openRedeem' onClick={openRedemption}>Redeem Law Tokens</button>
       <button className='rewardUserBtn' onClick={openRewardUser}>Reward User</button>
       </div>
-      
+
       <div className='selectUser'>
         <select
           onChange={(e) => setSelectedUser(users.find((user) => user.username === e.target.value))}
