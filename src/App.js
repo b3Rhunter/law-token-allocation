@@ -33,6 +33,7 @@ function App() {
       setSigner(_signer);
       setContract(_contract);
       setConnected(true)
+      updateUsers()
     };
 
   useEffect(() => {
