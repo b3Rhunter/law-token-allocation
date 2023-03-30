@@ -26,6 +26,7 @@ function App() {
   
     const connect = async () => {
       const _provider = new ethers.providers.Web3Provider(window.ethereum);
+      await _provider.send("eth_requestAccounts", []);
       const _signer = _provider.getSigner();
       const _contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI, _signer);
 
